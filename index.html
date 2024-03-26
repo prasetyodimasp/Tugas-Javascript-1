@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login Form</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+    }
+    form {
+        margin-top: 50px;
+    }
+    input[type="text"], input[type="password"] {
+        width: 200px;
+        padding: 10px;
+        margin: 10px;
+    }
+    button {
+        padding: 10px 20px;
+        margin: 10px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+    #message {
+        margin-top: 20px;
+    }
+</style>
+</head>
+<body>
+<h1>Login Form</h1>
+<form id="loginForm" onsubmit="login(event)">
+    <input type="text" id="username" placeholder="Username" required>
+    <br>
+    <input type="password" id="password" placeholder="Password" required>
+    <br>
+    <button type="submit">Login</button>
+</form>
+<div id="message"></div>
+
+<script>
+    // Dummy user data
+    const users = [
+        { username: "user1", password: "password1" },
+        { username: "user2", password: "password2" },
+        { username: "user3", password: "password3" }
+    ];
+
+    // Function to handle login
+    function login(event) {
+        event.preventDefault(); // Prevent form submission
+
+        const usernameInput = document.getElementById("username").value;
+        const passwordInput = document.getElementById("password").value;
+
+        let isLoggedIn = false;
+        for (let user of users) {
+            if (user.username === usernameInput && user.password === passwordInput) {
+                isLoggedIn = true;
+                break;
+            }
+        }
+
+        if (isLoggedIn) {
+            showMessage("Login successful", "green");
+        } else {
+            showMessage("Invalid username or password", "red");
+        }
+    }
+
+    // Function to display message
+    function showMessage(message, color) {
+        const messageDiv = document.getElementById("message");
+        messageDiv.textContent = message;
+        messageDiv.style.color = color;
+    }
+</script>
+</body>
+</html>
